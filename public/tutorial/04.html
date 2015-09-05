@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <canvas id="canvas" width="600" height="400"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'red';
+    ctx.fillRect(100, 100, 400, 200);
+    ctx.fillStyle = 'rgba(0, 200, 0, 0.5)';
+    ctx.fillRect(175, 75, 100, 100);
+    ctx.fillRect(325, 75, 100, 100);
+
+    // ctx.lineJoin = 'round';
+    // ctx.setLineDash([15, 5]);
+    ctx.strokeStyle = 'rgb(150, 0, 0)';
+    ctx.lineWidth = '10';
+    ctx.strokeRect(100, 100, 400, 200);
+  </script>
+</body>
+
+</html>
