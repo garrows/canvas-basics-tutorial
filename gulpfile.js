@@ -19,12 +19,12 @@ gulp.task('run', function() {
 });
 
 gulp.task('reload', function() {
-  gulp.src('public/tutorial/*.html')
+  gulp.src('public/**')
     .pipe(livereload());
 });
 
 
 gulp.task('default', ['run'], function() {
   livereload.listen();
-  gulp.watch('public/tutorial/*', ['reload']);
+  gulp.watch('public/**', ['reload']);
 });

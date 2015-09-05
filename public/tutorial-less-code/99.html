@@ -1,0 +1,51 @@
+<html>
+
+<body>
+  <h1>Linear Gradient</h1>
+  <p><a href="./04.html">Next</a></p>
+
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    function draw() {
+      var pos = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        w: canvas.width - 200,
+        h: canvas.height - 200
+      };
+
+      var lGrad = ctx.createLinearGradient(
+        0, 0, //x1, y1
+        0, canvas.height //x2, y2
+      );
+      lGrad.addColorStop(0, '#00ABEB');
+      lGrad.addColorStop(0.5, '#fff');
+      lGrad.addColorStop(0.5, '#26C000');
+      lGrad.addColorStop(1, '#fff');
+
+      var rGrad = ctx.createRadialGradient(
+        0, 0, 30, //x0, y0, r0,
+        0, 0, canvas.width * .8 //x1, y1, r1
+      );
+      rGrad.addColorStop(0, 'rgb(255, 255, 255)');
+      rGrad.addColorStop(0.2, 'rgba(255, 255, 0, .6)');
+      rGrad.addColorStop(1, 'rgba(255,255,255,0)');
+
+
+      ctx.fillStyle = lGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgb(0, 90, 0)';
+      // ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+      ctx.fillStyle = rGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    draw();
+  </script>
+</body>
+
+</html>

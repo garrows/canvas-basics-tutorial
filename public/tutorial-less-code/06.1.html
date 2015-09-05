@@ -1,0 +1,50 @@
+<html>
+
+<body>
+  <h1>Arcs</h1>
+  <p><a href="./06.2.html">Next</a></p>
+
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var pos = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      w: canvas.width - 200,
+      h: canvas.height - 200
+    };
+
+    function draw() {
+
+      ctx.fillStyle = 'rgb(0, 90, 0)';
+      ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+      ctx.lineWidth = '10';
+      ctx.strokeStyle = 'rgb(100, 0, 0)';
+      ctx.lineJoin = 'round';
+      // ctx.setLineDash([15, 5]);
+      ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+      ctx.lineWidth = '2';
+      var path = new Path2D();
+      path.moveTo(pos.x - 20, pos.y);
+      path.lineTo(pos.x, pos.y + 50);
+      path.lineTo(pos.x + 20, pos.y);
+
+      path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
+      path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI * 2);
+      // path.arc(pos.x, pos.y + pos.h /2 - 25, 10, 0, Math.PI);
+      // path.lineTo(pos.x, pos.y + pos.h /2 - 25);
+      ctx.stroke(path);
+
+
+
+    }
+    draw();
+  </script>
+</body>
+
+</html>
