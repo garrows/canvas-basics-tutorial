@@ -22,25 +22,19 @@
   </script>
   <pre>
     <code>
-      &lt;body&gt;
-        &lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;
-
-        &lt;script&gt;
-          var canvas = document.getElementById('canvas');
-          var ctx = canvas.getContext('2d');
-
+    ...
           function draw() {
+            // Multiple ways to set colors
             ctx.fillStyle = 'green';
-            // ctx.fillStyle = 'rgb(0, 90, 0)';
-            // ctx.fillStyle = 'rgb(0, 200, 0)';
+            ctx.fillStyle = '#00ff00';
+            ctx.fillStyle = 'rgb(0, 255, 0)';
             ctx.fillRect(100, 100, 400, 200);
+            // 50% transparency
             ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
             ctx.fillRect(50, 50, 100, 100);
           }
           draw();
-        &lt;/script&gt;
-
-      &lt;/body&gt;
+    ...
     </code>
   </pre>
 </body>
