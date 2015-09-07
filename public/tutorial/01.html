@@ -1,7 +1,7 @@
 <html>
 
 <body>
-  <h1>Setup</h1>
+  <h1>Get Rect</h1>
   <p><a href="./02.html">Next</a></p>
 
   <canvas id="canvas" width="600" height="400"></canvas>
@@ -9,7 +9,31 @@
   <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
+
+    function draw() {
+      ctx.fillRect(100, 100, 400, 200);
+    }
+    draw();
   </script>
+
+  <pre>
+    <code>
+      &lt;body&gt;
+        &lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;
+
+        &lt;script&gt;
+          var canvas = document.getElementById('canvas');
+          var ctx = canvas.getContext('2d');
+
+          function draw() {
+            ctx.fillRect(100, 100, 400, 200);
+          }
+          draw();
+        &lt;/script&gt;
+
+      &lt;/body&gt;
+    </code>
+  </pre>
 
 </body>
 

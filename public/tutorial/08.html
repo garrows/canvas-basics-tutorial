@@ -61,6 +61,70 @@
 
     draw();
   </script>
+  <pre>
+    <code>
+      &lt;body&gt;
+        &lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;
+
+        &lt;script&gt;
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        var pos = {
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          w: canvas.width - 200,
+          h: canvas.height - 200
+        };
+
+        function draw(timestamp) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = 'rgb(0, 90, 0)';
+          ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+          ctx.lineWidth = '10';
+          ctx.strokeStyle = 'rgb(100, 0, 0)';
+          ctx.lineJoin = 'round';
+          ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+          ctx.lineWidth = '2';
+          var path = new Path2D();
+          path.moveTo(pos.x - 20, pos.y);
+          path.lineTo(pos.x, pos.y + 50);
+          path.lineTo(pos.x + 20, pos.y);
+
+          path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
+          path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI);
+          path.lineTo(pos.x, pos.y + pos.h / 2 - 25);
+          ctx.stroke(path);
+
+          ctx.font = '20px Times New Roman';
+          ctx.fillStyle = 'Black';
+          var width = ctx.measureText('Canvas rocks').width;
+          ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
+
+
+          // pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
+
+          if (eyeImg.width) {
+            ctx.drawImage(eyeImg, pos.x - 120, pos.y - 80, 100, 70);
+            // ctx.drawImage(eyeImg, pos.x + 20, pos.y-80, 100, 70);
+            // ctx.drawImage(canvas, 0, 0, canvas.width / 2, canvas.height / 2);
+          }
+          requestAnimationFrame(draw);
+
+        }
+
+        var eyeImg = new Image();
+        eyeImg.src = '../images/eye.png';
+
+        draw();
+        &lt;/script&gt;
+
+      &lt;/body&gt;
+    </code>
+  </pre>
 </body>
 
 </html>

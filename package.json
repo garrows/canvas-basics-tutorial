@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "bower install",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
+    "bower": "^1.5.2",
     "gulp": "^3.9.0",
     "gulp-livereload": "^3.8.0",
     "gulp-nodemon": "^2.0.4"

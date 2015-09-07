@@ -1,8 +1,8 @@
 <html>
 
 <body>
-  <h1>Animation</h1>
-  <p><a href="./08.html">Next</a></p>
+  <h1>Text</h1>
+  <p><a href="./07.html">Next</a></p>
 
   <canvas id="canvas" width="600" height="400"></canvas>
 
@@ -17,8 +17,7 @@
       h: canvas.height - 200
     };
 
-    function draw(timestamp) {
-      // ctx.clearRect(0,0,canvas.width, canvas.height);
+    function draw() {
 
       ctx.fillStyle = 'rgb(0, 90, 0)';
       ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
@@ -26,6 +25,7 @@
       ctx.lineWidth = '10';
       ctx.strokeStyle = 'rgb(100, 0, 0)';
       ctx.lineJoin = 'round';
+      // ctx.setLineDash([15, 5]);
       ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
 
       ctx.lineWidth = '2';
@@ -35,18 +35,17 @@
       path.lineTo(pos.x + 20, pos.y);
 
       path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
-      path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI);
-      path.lineTo(pos.x, pos.y + pos.h / 2 - 25);
+      path.arc(pos.x, pos.y + pos.h /2 - 25, 10, 0, Math.PI);
+      path.lineTo(pos.x, pos.y + pos.h /2 - 25);
       ctx.stroke(path);
 
-      ctx.font = '20px Times New Roman';
-      ctx.fillStyle = 'Black';
-      var width = ctx.measureText('Canvas rocks').width;
-      ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
+      // ctx.font = '20px Times New Roman';
+      // ctx.fillStyle = 'Black';
+      ctx.fillText('Canvas rocks', pos.x, 10);
 
-      // pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
-      pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
-      requestAnimationFrame(draw);
+      // var width = ctx.measureText('Canvas rocks').width;
+      // ctx.fillText('Canvas rocks', pos.x-width/2, canvas.height);
+
 
     }
     draw();
@@ -67,8 +66,7 @@
             h: canvas.height - 200
           };
 
-          function draw(timestamp) {
-            // ctx.clearRect(0,0,canvas.width, canvas.height);
+          function draw() {
 
             ctx.fillStyle = 'rgb(0, 90, 0)';
             ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
@@ -76,6 +74,7 @@
             ctx.lineWidth = '10';
             ctx.strokeStyle = 'rgb(100, 0, 0)';
             ctx.lineJoin = 'round';
+            // ctx.setLineDash([15, 5]);
             ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
 
             ctx.lineWidth = '2';
@@ -85,18 +84,17 @@
             path.lineTo(pos.x + 20, pos.y);
 
             path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
-            path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI);
-            path.lineTo(pos.x, pos.y + pos.h / 2 - 25);
+            path.arc(pos.x, pos.y + pos.h /2 - 25, 10, 0, Math.PI);
+            path.lineTo(pos.x, pos.y + pos.h /2 - 25);
             ctx.stroke(path);
 
-            ctx.font = '20px Times New Roman';
-            ctx.fillStyle = 'Black';
-            var width = ctx.measureText('Canvas rocks').width;
-            ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
+            // ctx.font = '20px Times New Roman';
+            // ctx.fillStyle = 'Black';
+            ctx.fillText('Canvas rocks', pos.x, 10);
 
-            // pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
-            pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
-            requestAnimationFrame(draw);
+            // var width = ctx.measureText('Canvas rocks').width;
+            // ctx.fillText('Canvas rocks', pos.x-width/2, canvas.height);
+
 
           }
           draw();
