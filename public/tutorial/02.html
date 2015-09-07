@@ -1,12 +1,19 @@
 <html>
 
 <body>
+  <h1>Get Rect</h1>
+  <p><a href="./03.html">Next</a></p>
+
   <canvas id="canvas" width="600" height="400"></canvas>
+
   <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    ctx.fillRect(100, 100, 400, 200);
+    function draw() {
+      ctx.fillRect(100, 100, 400, 200);
+    }
+    draw();
   </script>
 </body>
 

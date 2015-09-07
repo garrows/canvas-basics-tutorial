@@ -1,74 +1,104 @@
 <html>
 
 <body>
+  <h1>Linear Gradient</h1>
+  <p><a href="./13.html">Next</a></p>
+
   <canvas id="canvas" width="600" height="400"></canvas>
+
   <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    var lineargradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    lineargradient.addColorStop(0, 'skyblue');
-    lineargradient.addColorStop(0.5, 'whitesmoke');
-    lineargradient.addColorStop(0.5, 'forestgreen');
-    lineargradient.addColorStop(1, 'lightgreen');
-    ctx.fillStyle = lineargradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    var pos = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      w: canvas.width - 200,
+      h: canvas.height - 200
+    };
 
-    ctx.fillStyle = 'red';
-    ctx.fillRect(100, 100, 400, 200);
-    ctx.fillStyle = 'rgba(0, 200, 0, 0.5)';
-    ctx.fillRect(175, 75, 100, 100);
-    ctx.fillRect(325, 75, 100, 100);
+    function draw(timestamp) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = 'rgb(150, 0, 0)';
-    ctx.lineWidth = '10';
-    ctx.strokeRect(100, 100, 400, 200);
-    ctx.clearRect(150, 200, 300, 75);
+      ctx.fillStyle = 'rgb(0, 90, 0)';
+      ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
 
-    var path = new Path2D();
-    path.moveTo(200, 200);
-    path.lineTo(225, 250);
-    path.lineTo(250, 200);
-    path.moveTo(400, 200);
-    path.lineTo(375, 250);
-    path.lineTo(350, 200);
-    ctx.fill(path);
+      ctx.lineWidth = '10';
+      ctx.strokeStyle = 'rgb(100, 0, 0)';
+      ctx.lineJoin = 'round';
+      ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
 
-    var eyePathLeft = new Path2D();
-    eyePathLeft.arc(225, 125, 10, 0, Math.PI * 2);
-    ctx.stroke(eyePathLeft);
-    var eyePathRight = new Path2D();
-    eyePathRight.arc(375, 125, 10, 0, Math.PI * 2);
-    ctx.stroke(eyePathRight);
+      ctx.lineWidth = '2';
+      var path = new Path2D();
+      path.moveTo(pos.x - 20, pos.y);
+      path.lineTo(pos.x, pos.y + 50);
+      path.lineTo(pos.x + 20, pos.y);
 
-    ctx.lineWidth = 1;
-    var path = new Path2D(),
-      sx = 100,
-      sy = 50,
-      dx = sx + 200,
-      dy = sy + 20,
-      cx = sx + 200,
-      cy = sy - 40;
-    path.moveTo(sx, sy);
-    path.quadraticCurveTo(cx, cy, dx, dy);
-    path.quadraticCurveTo(cx, cy, dx + 200, sy);
-    ctx.stroke(path);
+      path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
+      path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI);
+      path.lineTo(pos.x, pos.y + pos.h / 2 - 25);
+      ctx.stroke(path);
 
-    ctx.font = '20px Times New Roman';
-    ctx.fillStyle = 'Black';
-    ctx.fillText('Canvas is fun', 10, 20);
+      ctx.font = '20px Times New Roman';
+      ctx.fillStyle = 'Black';
+      var width = ctx.measureText('Canvas rocks').width;
+      ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
 
-    var img = new Image();
-    img.onload = function() {
-      ctx.drawImage(img, 225 - 50, 125 - 50, 100, 100);
-      ctx.save();
-      ctx.translate(canvas.width, 0);
-      // ctx.rotate(-Math.PI / 16);
-      ctx.scale(-1, 1);
-      ctx.drawImage(img, 225 - 50, 125 - 50, 100, 100);
-      ctx.restore();
+      // pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
+
+      if (eyeImg.width) {
+        ctx.save();
+        ctx.translate(pos.x - 120, pos.y - 80);
+        ctx.rotate(Math.PI / 16);
+        ctx.drawImage(eyeImg, 0, 0, 100, 70);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.translate(pos.x - 120, pos.y - 80);
+        ctx.rotate(Math.PI / 16);
+        ctx.drawImage(eyeImg, 0, 0, 100, 70);
+        ctx.restore();
+      }
+
+      ctx.lineWidth = 2;
+      var brow = new Path2D(),
+        sx = pos.x - pos.w / 2,
+        sy = pos.y - pos.h / 2 - 20,
+        dx = pos.x,
+        dy = sy,
+        cx = pos.x - pos.w / 4,
+        cy = sy - 80,
+        dx2 = pos.x + pos.w / 2,
+        c1x = dx + 10,
+        c1y = dy - 40,
+        c2x = dx2 + 10,
+        c2y = c1y,
+        t;
+
+      brow.moveTo(sx, sy);
+      brow.quadraticCurveTo(cx, cy, dx, dy);
+      brow.bezierCurveTo(c1x, c1y, c2x, c2y, dx2, dy);
+      ctx.stroke(brow);
+
+      var lGrad = ctx.createLinearGradient(
+        0, 0, //x1, y1
+        0, canvas.height //x2, y2
+      );
+      lGrad.addColorStop(0, '#00ABEB');
+      lGrad.addColorStop(0.5, '#fff');
+      lGrad.addColorStop(0.5, '#26C000');
+      lGrad.addColorStop(1, '#fff');
+
+      ctx.fillStyle = lGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      requestAnimationFrame(draw);
     }
-    img.src = '../images/eye.png';
+    var eyeImg = new Image();
+    eyeImg.src = '../images/eye.png';
+    draw();
   </script>
 </body>
 

@@ -1,39 +1,55 @@
 <html>
 
 <body>
+  <h1>Animation</h1>
+  <p><a href="./08.html">Next</a></p>
+
   <canvas id="canvas" width="600" height="400"></canvas>
+
   <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = 'red';
-    ctx.fillRect(100, 100, 400, 200);
-    ctx.fillStyle = 'rgba(0, 200, 0, 0.5)';
-    ctx.fillRect(175, 75, 100, 100);
-    ctx.fillRect(325, 75, 100, 100);
+    var pos = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      w: canvas.width - 200,
+      h: canvas.height - 200
+    };
 
-    ctx.strokeStyle = 'rgb(150, 0, 0)';
-    ctx.lineWidth = '10';
-    ctx.strokeRect(100, 100, 400, 200);
-    ctx.clearRect(150, 200, 300, 75);
+    function draw(timestamp) {
+      // ctx.clearRect(0,0,canvas.width, canvas.height);
 
-    var path = new Path2D();
-    path.moveTo(200, 200);
-    path.lineTo(225, 250);
-    path.lineTo(250, 200);
-    path.moveTo(400, 200);
-    path.lineTo(375, 250);
-    path.lineTo(350, 200);
-    ctx.fill(path);
+      ctx.fillStyle = 'rgb(0, 90, 0)';
+      ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
 
-    var eyePathLeft = new Path2D();
-    eyePathLeft.arc(225, 125, 10, 0, Math.PI*2);
-    ctx.stroke(eyePathLeft);
-    var eyePathRight = new Path2D();
-    // eyePathRight.arc(375, 125, 10, 0, Math.PI*2);
-    eyePathRight.arc(375, 125, 10, 0, Math.PI, true);
-    eyePathRight.closePath();
-    ctx.stroke(eyePathRight);
+      ctx.lineWidth = '10';
+      ctx.strokeStyle = 'rgb(100, 0, 0)';
+      ctx.lineJoin = 'round';
+      ctx.strokeRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
+
+      ctx.lineWidth = '2';
+      var path = new Path2D();
+      path.moveTo(pos.x - 20, pos.y);
+      path.lineTo(pos.x, pos.y + 50);
+      path.lineTo(pos.x + 20, pos.y);
+
+      path.moveTo(pos.x, pos.y + pos.h / 2 - 25);
+      path.arc(pos.x, pos.y + pos.h / 2 - 25, 10, 0, Math.PI);
+      path.lineTo(pos.x, pos.y + pos.h / 2 - 25);
+      ctx.stroke(path);
+
+      ctx.font = '20px Times New Roman';
+      ctx.fillStyle = 'Black';
+      var width = ctx.measureText('Canvas rocks').width;
+      ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
+
+      // pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
+      pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
+      requestAnimationFrame(draw);
+
+    }
+    draw();
   </script>
 </body>
 

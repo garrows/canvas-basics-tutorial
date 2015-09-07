@@ -1,19 +1,24 @@
 <html>
 
 <body>
+  <h1>Colors</h1>
+  <p><a href="./04.html">Next</a></p>
+
   <canvas id="canvas" width="600" height="400"></canvas>
+
   <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    // ctx.fillStyle = 'green';
-    // ctx.fillStyle = '#00cc00';
-    // ctx.fillStyle = 'rgb(0, 200, 0)';
-    ctx.fillStyle = 'red';
-    ctx.fillRect(100, 100, 400, 200);
-    ctx.fillStyle = 'rgba(0, 200, 0, 0.5)';
-    ctx.fillRect(175, 75, 100, 100);
-    ctx.fillRect(325, 75, 100, 100);
+    function draw() {
+      ctx.fillStyle = 'green';
+      // ctx.fillStyle = 'rgb(0, 90, 0)';
+      // ctx.fillStyle = 'rgb(0, 200, 0)';
+      ctx.fillRect(100, 100, 400, 200);
+      // ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+      // ctx.fillRect(50, 50, 100, 100);
+    }
+    draw();
   </script>
 </body>
 
