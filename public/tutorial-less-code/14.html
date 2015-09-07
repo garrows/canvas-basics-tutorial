@@ -1,8 +1,7 @@
 <html>
 
 <body>
-  <h1>Dem Curves (Quadratic & Bezier)</h1>
-  <p><a href="./12.html">Next</a></p>
+  <h1>That's all folks. Thank you.</h1>
 
   <canvas id="canvas" width="600" height="400"></canvas>
 
@@ -19,6 +18,19 @@
 
     function draw(timestamp) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      var lGrad = ctx.createLinearGradient(
+        0, 0, //x1, y1
+        0, canvas.height //x2, y2
+      );
+      lGrad.addColorStop(0, '#00ABEB');
+      lGrad.addColorStop(0.5, '#fff');
+      lGrad.addColorStop(0.5, '#26C000');
+      lGrad.addColorStop(1, '#fff');
+
+      ctx.fillStyle = lGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 
       ctx.fillStyle = 'rgb(0, 90, 0)';
       ctx.fillRect(pos.x - pos.w / 2, pos.y - pos.h / 2, pos.w, pos.h);
@@ -44,7 +56,7 @@
       var width = ctx.measureText('Canvas rocks').width;
       ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
 
-      // pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
+      pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
 
       if (eyeImg.width) {
         ctx.save();
@@ -69,21 +81,30 @@
         dx = pos.x,
         dy = sy,
         cx = pos.x - pos.w / 4,
-        cy = sy - 80,
-        // dx2 = pos.x + pos.w / 2,
-        // c1x = dx + 10,
-        // c1y = dy - 40,
-        // c2x = dx2 + 10,
-        // c2y = c1y,
+        cy = sy - 80 - (20* Math.sin(timestamp/20)),
+        dx2 = pos.x + pos.w / 2,
+        c1x = dx + 10,
+        c1y = dy - 40,
+        c2x = dx2 + 10,
+        c2y = c1y,
         t;
 
-      ctx.strokeRect(cx, cy, 1, 1);
       brow.moveTo(sx, sy);
       brow.quadraticCurveTo(cx, cy, dx, dy);
-      // ctx.strokeRect(c1x, c1y, 1, 1);
-      // ctx.strokeRect(c2x, c2y, 1, 1);
-      // brow.bezierCurveTo(c1x, c1y, c2x, c2y, dx2, dy);
+      brow.bezierCurveTo(c1x, c1y, c2x, c2y, dx2, dy);
       ctx.stroke(brow);
+
+      var rGrad = ctx.createRadialGradient(
+        0, 0, 30, //x0, y0, r0,
+        0, 0, canvas.width * .8 //x1, y1, r1
+      );
+      rGrad.addColorStop(0, 'rgb(255, 255, 255)');
+      rGrad.addColorStop(0.2, 'rgba(255, 255, 0, .6)');
+      rGrad.addColorStop(1, 'rgba(255,255,255,0)');
+
+      ctx.fillStyle = rGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 
       requestAnimationFrame(draw);
     }

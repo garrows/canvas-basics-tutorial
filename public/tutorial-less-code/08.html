@@ -45,7 +45,7 @@
       ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
 
 
-      // pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
+      // pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
 
       if (eyeImg.width) {
         ctx.drawImage(eyeImg, pos.x - 120, pos.y - 80, 100, 70);

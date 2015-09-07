@@ -44,7 +44,8 @@
       var width = ctx.measureText('Canvas rocks').width;
       ctx.fillText('Canvas rocks', pos.x - width / 2, canvas.height);
 
-      pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
+      // pos.y = (canvas.height / 2) + 50 * Math.sin(timestamp / 300)
+      pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
       requestAnimationFrame(draw);
 
     }

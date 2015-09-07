@@ -1,8 +1,8 @@
 <html>
 
 <body>
-  <h1>Move canvas around, flip it and reverse it</h1>
-  <p><a href="./10.html">Next</a></p>
+  <h1>Linear Gradient</h1>
+  <p><a href="./13.html">Next</a></p>
 
   <canvas id="canvas" width="600" height="400"></canvas>
 
@@ -47,16 +47,54 @@
       // pos.y = (canvas.height / 2) + 50 * -Math.abs(Math.sin(timestamp / 300));
 
       if (eyeImg.width) {
-        ctx.drawImage(eyeImg, pos.x - 120, pos.y - 80, 100, 70);
+        ctx.save();
+        ctx.translate(pos.x - 120, pos.y - 80);
+        ctx.rotate(Math.PI / 16);
+        ctx.drawImage(eyeImg, 0, 0, 100, 70);
+        ctx.restore();
+
         ctx.save();
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
-        ctx.drawImage(eyeImg, pos.x + 20, pos.y - 80, 100, 70);
-        // ctx.drawImage(eyeImg, pos.x - 120, pos.y - 80, 100, 70);
+        ctx.translate(pos.x - 120, pos.y - 80);
+        ctx.rotate(Math.PI / 16);
+        ctx.drawImage(eyeImg, 0, 0, 100, 70);
         ctx.restore();
       }
-      requestAnimationFrame(draw);
 
+      ctx.lineWidth = 2;
+      var brow = new Path2D(),
+        sx = pos.x - pos.w / 2,
+        sy = pos.y - pos.h / 2 - 20,
+        dx = pos.x,
+        dy = sy,
+        cx = pos.x - pos.w / 4,
+        cy = sy - 80,
+        dx2 = pos.x + pos.w / 2,
+        c1x = dx + 10,
+        c1y = dy - 40,
+        c2x = dx2 + 10,
+        c2y = c1y,
+        t;
+
+      brow.moveTo(sx, sy);
+      brow.quadraticCurveTo(cx, cy, dx, dy);
+      brow.bezierCurveTo(c1x, c1y, c2x, c2y, dx2, dy);
+      ctx.stroke(brow);
+
+      var lGrad = ctx.createLinearGradient(
+        0, 0, //x1, y1
+        0, canvas.height //x2, y2
+      );
+      lGrad.addColorStop(0, '#00ABEB');
+      lGrad.addColorStop(0.5, '#fff');
+      lGrad.addColorStop(0.5, '#26C000');
+      lGrad.addColorStop(1, '#fff');
+
+      ctx.fillStyle = lGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      requestAnimationFrame(draw);
     }
     var eyeImg = new Image();
     eyeImg.src = '../images/eye.png';
